@@ -1,0 +1,6 @@
+type OPEN_ACCOUNT_DIALOG = "OPEN_ACCOUNT_DIALOG";
+type CLOSE_ACCOUNT_DIALOG = "CLOSE_ACCOUNT_DIALOG";
+
+export type AccountDialogAction =
+  | { type: OPEN_ACCOUNT_DIALOG }
+  | { type: CLOSE_ACCOUNT_DIALOG };
