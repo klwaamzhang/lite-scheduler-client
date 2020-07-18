@@ -13,6 +13,7 @@ import Container from "@material-ui/core/Container";
 import Copyright from "../UtilitiesComponents/Copyright";
 import { useAuthDialogActions, useAppActions } from "../../actions";
 import { SERVER_URL } from "../../environment/env";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,25 +47,39 @@ export default function SignInPage() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const res = fetch(SERVER_URL + "/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-
-    res
-      .then((res) => res.json())
-      .then((data: any) => {
-        if (data.msg === 1) {
-          fetchUserData(data);
+    axios
+      .post(SERVER_URL + "/signin", formData)
+      // .then((res) => res.json())
+      .then((res: any) => {
+        console.log(res.data);
+        if (res.data.msg === 1) {
+          fetchUserData(res.data);
           signIn();
           closeAuthDialog();
         } else {
-          alert(data.msg);
+          alert(res.data.msg);
         }
       });
+
+    // const res = fetch(SERVER_URL + "/signin", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(formData),
+    // });
+
+    // res
+    //   .then((res) => res.json())
+    //   .then((data: any) => {
+    //     if (data.msg === 1) {
+    //       fetchUserData(data);
+    //       signIn();
+    //       closeAuthDialog();
+    //     } else {
+    //       alert(data.msg);
+    //     }
+    //   });
   };
 
   return (

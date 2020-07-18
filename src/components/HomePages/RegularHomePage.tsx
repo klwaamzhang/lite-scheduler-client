@@ -11,6 +11,7 @@ import { DropDownList } from "@syncfusion/ej2-dropdowns";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { SERVER_URL } from "../../environment/env";
+import axios from "axios";
 
 type RegularHomePageProps = {
   timetable?: boolean;
@@ -80,47 +81,74 @@ export default function RegularHomePage(props: RegularHomePageProps) {
 
   const retrieveUserData = () => {
     console.log(userData._id);
-    const res = fetch(SERVER_URL + "/retrieveUserData", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userId: userData._id }),
-    });
-    res
-      .then((data) => data.json())
-      .then((data: any) => {
-        console.log(data);
-        if (data.msg !== 0 || data.msg !== -1) {
+
+    axios
+      .post(SERVER_URL + "/retrieveUserData", { userId: userData._id })
+      .then((res: any) => {
+        console.log(res.data);
+        if (res.data.msg !== 0 || res.data.msg !== -1) {
           setUserScheduleData({
             ...userScheduleData,
             bindingData: props.timetable
-              ? data.timetableData
-                ? data.timetableData
+              ? res.data.timetableData
+                ? res.data.timetableData
                 : []
-              : data.scheduleData
-              ? data.scheduleData
+              : res.data.scheduleData
+              ? res.data.scheduleData
               : [],
           });
         } else {
-          alert(data.msg);
+          alert(res.data.msg);
         }
       });
+
+    // const res = fetch(SERVER_URL + "/retrieveUserData", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ userId: userData._id }),
+    // });
+    // res
+    //   .then((data) => data.json())
+    //   .then((data: any) => {
+    //     console.log(data);
+    //     if (data.msg !== 0 || data.msg !== -1) {
+    //       setUserScheduleData({
+    //         ...userScheduleData,
+    //         bindingData: props.timetable
+    //           ? data.timetableData
+    //             ? data.timetableData
+    //             : []
+    //           : data.scheduleData
+    //           ? data.scheduleData
+    //           : [],
+    //       });
+    //     } else {
+    //       alert(data.msg);
+    //     }
+    //   });
   };
 
   const saveUserData = () => {
-    const res = fetch(SERVER_URL + "/storeUserData", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userScheduleData),
-    });
-    res
-      .then((res) => res.json())
-      .then((data: any) => {
-        alert(data.msg);
+    axios
+      .post(SERVER_URL + "/storeUserData", userScheduleData)
+      .then((res: any) => {
+        alert(res.data.msg);
       });
+
+    // const res = fetch(SERVER_URL + "/storeUserData", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(userScheduleData),
+    // });
+    // res
+    //   .then((res) => res.json())
+    //   .then((data: any) => {
+    //     alert(data.msg);
+    //   });
   };
 
   // when the following actions completed, save user data to the database

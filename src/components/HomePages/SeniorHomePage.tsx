@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { ScheduleComponent, Inject, Day } from "@syncfusion/ej2-react-schedule";
-import { DateTimePickerComponent } from "@syncfusion/ej2-react-calendars";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { SERVER_URL } from "../../environment/env";
+import axios from "axios";
 
 export default function SeniorHomePage() {
   const userData = useSelector((state: RootState) => state.app.userData);
@@ -21,41 +21,62 @@ export default function SeniorHomePage() {
 
   const retrieveUserData = () => {
     console.log(userData._id);
-    const res = fetch(SERVER_URL + "/retrieveUserData", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userId: userData._id }),
-    });
-    res
-      .then((data) => data.json())
-      .then((data: any) => {
-        console.log(data);
-        if (data.msg !== 0 || data.msg !== -1) {
+
+    axios
+      .post(SERVER_URL + "/retrieveUserData", { userId: userData._id })
+      .then((res: any) => {
+        console.log(res.data);
+        if (res.data.msg !== 0 || res.data.msg !== -1) {
           setUserScheduleData({
             ...userScheduleData,
-            bindingData: data.scheduleData,
+            bindingData: res.data.scheduleData,
           });
         } else {
-          alert(data.msg);
+          alert(res.data.msg);
         }
       });
+
+    // const res = fetch(SERVER_URL + "/retrieveUserData", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ userId: userData._id }),
+    // });
+    // res
+    //   .then((data) => data.json())
+    //   .then((data: any) => {
+    //     console.log(data);
+    //     if (data.msg !== 0 || data.msg !== -1) {
+    //       setUserScheduleData({
+    //         ...userScheduleData,
+    //         bindingData: data.scheduleData,
+    //       });
+    //     } else {
+    //       alert(data.msg);
+    //     }
+    //   });
   };
 
   const saveUserData = () => {
-    const res = fetch(SERVER_URL + "/storeUserData", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userScheduleData),
-    });
-    res
-      .then((res) => res.json())
-      .then((data: any) => {
-        alert(data.msg);
+    axios
+      .post(SERVER_URL + "/storeUserData", userScheduleData)
+      .then((res: any) => {
+        alert(res.data.msg);
       });
+
+    // const res = fetch(SERVER_URL + "/storeUserData", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(userScheduleData),
+    // });
+    // res
+    //   .then((res) => res.json())
+    //   .then((data: any) => {
+    //     alert(data.msg);
+    //   });
   };
 
   const onactionComplete = (args: any) => {

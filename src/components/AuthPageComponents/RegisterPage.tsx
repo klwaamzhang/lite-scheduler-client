@@ -16,6 +16,7 @@ import { InputLabel, MenuItem } from "@material-ui/core";
 import Copyright from "../UtilitiesComponents/Copyright";
 import { useAuthDialogActions } from "../../actions";
 import { SERVER_URL } from "../../environment/env";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -55,22 +56,31 @@ export default function RegisterPage() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const response = fetch(SERVER_URL + "/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
+
+    axios.post(SERVER_URL + "/signup", formData).then((res: any) => {
+      if (res.data.msg === 1) {
+        goToLoginPage();
+      } else {
+        alert(res.data.msg);
+      }
     });
-    response
-      .then((res) => res.json())
-      .then((data: any) => {
-        if (data.msg === 1) {
-          goToLoginPage();
-        } else {
-          alert(data.msg);
-        }
-      });
+
+    // const response = fetch(SERVER_URL + "/signup", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(formData),
+    // });
+    // response
+    //   .then((res) => res.json())
+    //   .then((data: any) => {
+    //     if (data.msg === 1) {
+    //       goToLoginPage();
+    //     } else {
+    //       alert(data.msg);
+    //     }
+    //   });
   };
 
   return (

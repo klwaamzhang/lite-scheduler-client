@@ -16,6 +16,7 @@ import Copyright from "../UtilitiesComponents/Copyright";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { SERVER_URL } from "../../environment/env";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -49,19 +50,24 @@ export default function AccountPage() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const res = fetch(SERVER_URL + "/updateUserInfo", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
+    axios.post(SERVER_URL + "/updateUserInfo", formData).then((res: any) => {
+      alert(res.data.msg);
+      window.location.reload();
     });
-    res
-      .then((res) => res.json())
-      .then((data: any) => {
-        alert(data.msg);
-        window.location.reload();
-      });
+
+    // const res = fetch(SERVER_URL + "/updateUserInfo", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(formData),
+    // });
+    // res
+    //   .then((res) => res.json())
+    //   .then((data: any) => {
+    //     alert(data.msg);
+    //     window.location.reload();
+    //   });
   };
 
   return (
