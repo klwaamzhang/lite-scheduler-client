@@ -12,6 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Copyright from "../UtilitiesComponents/Copyright";
 import { useAuthDialogActions, useAppActions } from "../../actions";
+import { SERVER_URL } from "../../environment/env";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -45,7 +46,7 @@ export default function SignInPage() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const res = fetch("http://localhost:8555/signin", {
+    const res = fetch(SERVER_URL + "/signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

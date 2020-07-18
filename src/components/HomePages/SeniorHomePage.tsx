@@ -3,6 +3,7 @@ import { ScheduleComponent, Inject, Day } from "@syncfusion/ej2-react-schedule";
 import { DateTimePickerComponent } from "@syncfusion/ej2-react-calendars";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
+import { SERVER_URL } from "../../environment/env";
 
 export default function SeniorHomePage() {
   const userData = useSelector((state: RootState) => state.app.userData);
@@ -20,7 +21,7 @@ export default function SeniorHomePage() {
 
   const retrieveUserData = () => {
     console.log(userData._id);
-    const res = fetch("http://localhost:8555/retrieveUserData", {
+    const res = fetch(SERVER_URL + "/retrieveUserData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +44,7 @@ export default function SeniorHomePage() {
   };
 
   const saveUserData = () => {
-    const res = fetch("http://localhost:8555/storeUserData", {
+    const res = fetch(SERVER_URL + "/storeUserData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

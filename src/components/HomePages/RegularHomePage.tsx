@@ -10,6 +10,7 @@ import { createElement } from "@syncfusion/ej2-base";
 import { DropDownList } from "@syncfusion/ej2-dropdowns";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
+import { SERVER_URL } from "../../environment/env";
 
 type RegularHomePageProps = {
   timetable?: boolean;
@@ -79,7 +80,7 @@ export default function RegularHomePage(props: RegularHomePageProps) {
 
   const retrieveUserData = () => {
     console.log(userData._id);
-    const res = fetch("http://localhost:8555/retrieveUserData", {
+    const res = fetch(SERVER_URL + "/retrieveUserData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -108,7 +109,7 @@ export default function RegularHomePage(props: RegularHomePageProps) {
   };
 
   const saveUserData = () => {
-    const res = fetch("http://localhost:8555/storeUserData", {
+    const res = fetch(SERVER_URL + "/storeUserData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

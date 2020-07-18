@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/lite-scheduler-client/static/js/main.f63a1819.chunk.js",
-    "main.js.map": "/lite-scheduler-client/static/js/main.f63a1819.chunk.js.map",
+    "main.js": "/lite-scheduler-client/static/js/main.0f5e504d.chunk.js",
+    "main.js.map": "/lite-scheduler-client/static/js/main.0f5e504d.chunk.js.map",
     "runtime-main.js": "/lite-scheduler-client/static/js/runtime-main.276e641e.js",
     "runtime-main.js.map": "/lite-scheduler-client/static/js/runtime-main.276e641e.js.map",
     "static/js/2.96921f4c.chunk.js": "/lite-scheduler-client/static/js/2.96921f4c.chunk.js",
     "static/js/2.96921f4c.chunk.js.map": "/lite-scheduler-client/static/js/2.96921f4c.chunk.js.map",
     "index.html": "/lite-scheduler-client/index.html",
-    "precache-manifest.9d109092010d4d966d7cd374eea4bbd5.js": "/lite-scheduler-client/precache-manifest.9d109092010d4d966d7cd374eea4bbd5.js",
+    "precache-manifest.99ad724f4a825d1c89be8dcadb402c72.js": "/lite-scheduler-client/precache-manifest.99ad724f4a825d1c89be8dcadb402c72.js",
     "service-worker.js": "/lite-scheduler-client/service-worker.js",
     "static/js/2.96921f4c.chunk.js.LICENSE.txt": "/lite-scheduler-client/static/js/2.96921f4c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.276e641e.js",
     "static/js/2.96921f4c.chunk.js",
-    "static/js/main.f63a1819.chunk.js"
+    "static/js/main.0f5e504d.chunk.js"
   ]
 }

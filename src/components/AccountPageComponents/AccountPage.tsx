@@ -15,6 +15,7 @@ import { InputLabel, MenuItem } from "@material-ui/core";
 import Copyright from "../UtilitiesComponents/Copyright";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
+import { SERVER_URL } from "../../environment/env";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -48,7 +49,7 @@ export default function AccountPage() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const res = fetch("http://localhost:8555/updateUserInfo", {
+    const res = fetch(SERVER_URL + "/updateUserInfo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

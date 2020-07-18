@@ -15,6 +15,7 @@ import Select from "@material-ui/core/Select";
 import { InputLabel, MenuItem } from "@material-ui/core";
 import Copyright from "../UtilitiesComponents/Copyright";
 import { useAuthDialogActions } from "../../actions";
+import { SERVER_URL } from "../../environment/env";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -54,7 +55,7 @@ export default function RegisterPage() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const response = fetch("http://localhost:8555/signup", {
+    const response = fetch(SERVER_URL + "/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
