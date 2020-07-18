@@ -1,7 +1,6 @@
 import React from "react";
 import { render, findByTestId, fireEvent } from "@testing-library/react";
 import Appbar from "../components/Appbar";
-import { AppProvider } from "../context/AppContext";
 import Accountpage from "../components/AccountPage/AccountPage";
 
 // describe("<Appbar />", () => {
