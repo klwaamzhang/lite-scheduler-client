@@ -10,7 +10,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Copyright from "../UtilitiesComponents/Copyright";
+import Copyright from "../Utilities/Copyright";
 import { useAuthDialogActions, useAppActions } from "../../actions";
 import { SERVER_URL } from "../../environment/env";
 import axios from "axios";

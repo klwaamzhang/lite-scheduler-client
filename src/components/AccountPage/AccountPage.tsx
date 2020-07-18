@@ -3,7 +3,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -13,8 +12,9 @@ import Container from "@material-ui/core/Container";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { InputLabel, MenuItem } from "@material-ui/core";
-import Copyright from "../UtilitiesComponents/Copyright";
-import { useAuthDialogActions } from "../../actions";
+import Copyright from "../Utilities/Copyright";
+import { useSelector } from "react-redux";
+import { RootState } from "../../reducers";
 import { SERVER_URL } from "../../environment/env";
 import axios from "axios";
 
@@ -42,45 +42,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RegisterPage() {
+export default function AccountPage() {
   const classes = useStyles();
+  const userData = useSelector((state: RootState) => state.app.userData);
 
-  const { goToLoginPage } = useAuthDialogActions();
-
-  const [formData, setFormData] = React.useState({
-    emailAddress: "",
-    userName: "",
-    password: "",
-    accountType: "Regular",
-  });
+  const [formData, setFormData] = React.useState(userData);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-
-    axios.post(SERVER_URL + "/signup", formData).then((res: any) => {
-      if (res.data.msg === 1) {
-        goToLoginPage();
-      } else {
-        alert(res.data.msg);
-      }
+    axios.post(SERVER_URL + "/updateUserInfo", formData).then((res: any) => {
+      alert(res.data.msg);
+      window.location.reload();
     });
-
-    // const response = fetch(SERVER_URL + "/signup", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(formData),
-    // });
-    // response
-    //   .then((res) => res.json())
-    //   .then((data: any) => {
-    //     if (data.msg === 1) {
-    //       goToLoginPage();
-    //     } else {
-    //       alert(data.msg);
-    //     }
-    //   });
   };
 
   return (
@@ -91,9 +64,13 @@ export default function RegisterPage() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          USER ACCOUNT
         </Typography>
-        <form className={classes.form} onSubmit={handleSubmit}>
+        <form
+          data-testid="account-form"
+          className={classes.form}
+          onSubmit={handleSubmit}
+        >
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -180,15 +157,17 @@ export default function RegisterPage() {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            UPDATE
           </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link href="#" variant="body2" onClick={goToLoginPage}>
-                Already have an account? Login
-              </Link>
-            </Grid>
-          </Grid>
+          <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            color="secondary"
+            onClick={() => window.location.reload()}
+          >
+            SIGN OUT
+          </Button>
         </form>
       </div>
       <Box mt={5}>
