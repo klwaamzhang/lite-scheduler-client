@@ -86,7 +86,7 @@ export default function RegularHomePage(props: RegularHomePageProps) {
       .post(SERVER_URL + "/retrieveUserData", { userId: userData._id })
       .then((res: any) => {
         console.log(res.data);
-        if (res.data.msg !== 0 || res.data.msg !== -1) {
+        if (res.data.msg === "Data Retrieved Successful") {
           setUserScheduleData({
             ...userScheduleData,
             bindingData: props.timetable
@@ -101,33 +101,6 @@ export default function RegularHomePage(props: RegularHomePageProps) {
           alert(res.data.msg);
         }
       });
-
-    // const res = fetch(SERVER_URL + "/retrieveUserData", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ userId: userData._id }),
-    // });
-    // res
-    //   .then((data) => data.json())
-    //   .then((data: any) => {
-    //     console.log(data);
-    //     if (data.msg !== 0 || data.msg !== -1) {
-    //       setUserScheduleData({
-    //         ...userScheduleData,
-    //         bindingData: props.timetable
-    //           ? data.timetableData
-    //             ? data.timetableData
-    //             : []
-    //           : data.scheduleData
-    //           ? data.scheduleData
-    //           : [],
-    //       });
-    //     } else {
-    //       alert(data.msg);
-    //     }
-    //   });
   };
 
   const saveUserData = () => {
@@ -136,19 +109,6 @@ export default function RegularHomePage(props: RegularHomePageProps) {
       .then((res: any) => {
         alert(res.data.msg);
       });
-
-    // const res = fetch(SERVER_URL + "/storeUserData", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(userScheduleData),
-    // });
-    // res
-    //   .then((res) => res.json())
-    //   .then((data: any) => {
-    //     alert(data.msg);
-    //   });
   };
 
   // when the following actions completed, save user data to the database

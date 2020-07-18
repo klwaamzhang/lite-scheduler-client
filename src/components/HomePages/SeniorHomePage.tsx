@@ -26,7 +26,7 @@ export default function SeniorHomePage() {
       .post(SERVER_URL + "/retrieveUserData", { userId: userData._id })
       .then((res: any) => {
         console.log(res.data);
-        if (res.data.msg !== 0 || res.data.msg !== -1) {
+        if (res.data.msg === "Data Retrieved Successful") {
           setUserScheduleData({
             ...userScheduleData,
             bindingData: res.data.scheduleData,
@@ -35,27 +35,6 @@ export default function SeniorHomePage() {
           alert(res.data.msg);
         }
       });
-
-    // const res = fetch(SERVER_URL + "/retrieveUserData", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ userId: userData._id }),
-    // });
-    // res
-    //   .then((data) => data.json())
-    //   .then((data: any) => {
-    //     console.log(data);
-    //     if (data.msg !== 0 || data.msg !== -1) {
-    //       setUserScheduleData({
-    //         ...userScheduleData,
-    //         bindingData: data.scheduleData,
-    //       });
-    //     } else {
-    //       alert(data.msg);
-    //     }
-    //   });
   };
 
   const saveUserData = () => {
@@ -64,19 +43,6 @@ export default function SeniorHomePage() {
       .then((res: any) => {
         alert(res.data.msg);
       });
-
-    // const res = fetch(SERVER_URL + "/storeUserData", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(userScheduleData),
-    // });
-    // res
-    //   .then((res) => res.json())
-    //   .then((data: any) => {
-    //     alert(data.msg);
-    //   });
   };
 
   const onactionComplete = (args: any) => {
