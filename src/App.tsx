@@ -13,7 +13,7 @@ export default function App() {
   const userData = useSelector((state: RootState) => state.app.userData);
 
   return (
-    <div>
+    <>
       <AccountPageDialog />
       <AuthDialog />
       <SchedulerAppBar />
@@ -29,6 +29,6 @@ export default function App() {
             return <UnregisteredHomePage />;
         }
       })()}
-    </div>
+    </>
   );
 }
