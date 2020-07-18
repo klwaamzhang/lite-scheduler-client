@@ -70,85 +70,10 @@ export default function SeniorHomePage() {
 
   document.body.style.zoom = "150%";
 
-  const editorTemplate = (
-    props:
-      | {
-          EventType: any;
-          startTime: any;
-          StartTime: any;
-          endTime: any;
-          EndTime: any;
-        }
-      | undefined
-  ) => {
-    return props !== undefined ? (
-      <table className="custom-event-editor" style={{ width: "100%" }}>
-        <tbody>
-          <tr>
-            <td className="e-textlabel">Title</td>
-            <td colSpan={4}>
-              <input
-                id="Summary"
-                className="e-field e-input"
-                type="text"
-                name="Subject"
-                style={{ width: "100%" }}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td className="e-textlabel">From</td>
-            <td colSpan={4}>
-              <DateTimePickerComponent
-                format="dd/MM/yy hh:mm a"
-                id="StartTime"
-                data-name="StartTime"
-                value={new Date(props.startTime || props.StartTime)}
-                className="e-field"
-              ></DateTimePickerComponent>
-            </td>
-          </tr>
-          <tr>
-            <td className="e-textlabel">To</td>
-            <td colSpan={4}>
-              <DateTimePickerComponent
-                format="dd/MM/yy hh:mm a"
-                id="EndTime"
-                data-name="EndTime"
-                value={new Date(props.endTime || props.EndTime)}
-                className="e-field"
-              ></DateTimePickerComponent>
-            </td>
-          </tr>
-          <tr>
-            <td className="e-textlabel">Reason</td>
-            <td colSpan={4}>
-              <textarea
-                id="Description"
-                className="e-field e-input"
-                name="Description"
-                rows={3}
-                cols={50}
-                style={{
-                  width: "100%",
-                  height: "60px !important",
-                  resize: "vertical",
-                }}
-              ></textarea>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    ) : (
-      <div></div>
-    );
-  };
-
   return (
     <ScheduleComponent
       width="100%"
       views={["Day"]}
-      editorTemplate={editorTemplate}
       actionComplete={onactionComplete}
       eventSettings={{ dataSource: userScheduleData.bindingData }}
     >
