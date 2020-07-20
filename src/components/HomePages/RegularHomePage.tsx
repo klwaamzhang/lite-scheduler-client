@@ -74,10 +74,10 @@ export default function RegularHomePage(props: RegularHomePageProps) {
     }
   };
 
-  // retrive user info when user id changes
+  // Retrieve user info from server when enter in the page
   useEffect(() => {
     retrieveUserData();
-  }, [userScheduleData.userId]);
+  }, []);
 
   const retrieveUserData = () => {
     console.log(userData._id);
