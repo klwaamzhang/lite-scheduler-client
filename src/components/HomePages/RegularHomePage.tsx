@@ -81,7 +81,6 @@ export default function RegularHomePage(props: RegularHomePageProps) {
 
   const retrieveUserData = () => {
     console.log(userData._id);
-
     axios
       .post(SERVER_URL + "/retrieveUserData", { userId: userData._id })
       .then((res: any) => {
@@ -122,14 +121,22 @@ export default function RegularHomePage(props: RegularHomePageProps) {
     }
   };
 
+  if (userData.accountType === "Senior") document.body.style.zoom = "150%";
+
   return (
     <ScheduleComponent
       popupOpen={onPopupOpen}
       eventSettings={{ dataSource: userScheduleData.bindingData }}
       actionComplete={onactionComplete}
-      views={["Day", "Week", "Month"]}
+      views={
+        userData.accountType !== "Senior" ? ["Day", "Week", "Month"] : ["Day"]
+      }
     >
-      <Inject services={[Day, Week, Month]} />
+      <Inject
+        services={
+          userData.accountType !== "Senior" ? [Day, Week, Month] : [Day]
+        }
+      />
     </ScheduleComponent>
   );
 }
