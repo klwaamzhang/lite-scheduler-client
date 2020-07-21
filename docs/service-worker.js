@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/lite-scheduler-client/precache-manifest.99ad724f4a825d1c89be8dcadb402c72.js"
+  "/lite-scheduler-client/precache-manifest.6604062b2010fd074c46e40427aeb6a1.js"
 );
 
 self.addEventListener('message', (event) => {
