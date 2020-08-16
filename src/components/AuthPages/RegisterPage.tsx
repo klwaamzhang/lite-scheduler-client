@@ -12,7 +12,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { InputLabel, MenuItem } from "@material-ui/core";
+import {
+  InputLabel,
+  MenuItem,
+  CircularProgress,
+  Backdrop,
+} from "@material-ui/core";
 import Copyright from "../Utilities/Copyright";
 import { useAuthDialogActions } from "../../actions";
 import { SERVER_URL } from "../../environment/env";
@@ -40,6 +45,13 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     minWidth: 200,
   },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
+  loading: {
+    marginLeft: theme.spacing(1),
+  },
 }));
 
 export default function RegisterPage() {
@@ -51,10 +63,20 @@ export default function RegisterPage() {
     password: "",
     accountType: "Regular",
   });
+  const [open, setOpen] = React.useState(false);
+
+  const handleBackDropClose = () => {
+    setOpen(false);
+  };
+  const handleBackDropOpen = () => {
+    setOpen(true);
+  };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    handleBackDropOpen();
     axios.post(SERVER_URL + "/signup", formData).then((res: any) => {
+      handleBackDropClose();
       if (res.data.msg === "SignUp Succeeded") {
         goToLoginPage();
       } else {
@@ -174,6 +196,10 @@ export default function RegisterPage() {
       <Box mt={5}>
         <Copyright />
       </Box>
+      <Backdrop className={classes.backdrop} open={open}>
+        <CircularProgress color="inherit" />
+        <p className={classes.loading}>Loading...</p>
+      </Backdrop>
     </Container>
   );
 }

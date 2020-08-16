@@ -14,6 +14,7 @@ import Copyright from "../Utilities/Copyright";
 import { useAuthDialogActions, useAppActions } from "../../actions";
 import { SERVER_URL } from "../../environment/env";
 import axios from "axios";
+import { Backdrop, CircularProgress } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -33,6 +34,13 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
+  loading: {
+    marginLeft: theme.spacing(1),
+  },
 }));
 
 export default function SignInPage() {
@@ -43,11 +51,21 @@ export default function SignInPage() {
     emailAddress: "",
     password: "",
   });
+  const [open, setOpen] = React.useState(false);
+
+  const handleBackDropClose = () => {
+    setOpen(false);
+  };
+  const handleBackDropOpen = () => {
+    setOpen(true);
+  };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    handleBackDropOpen();
     axios.post(SERVER_URL + "/signin", formData).then((res: any) => {
       console.log(res.data);
+      handleBackDropClose();
       if (res.data.msg === "SignIn Succeeded") {
         fetchUserData(res.data);
         signIn();
@@ -127,6 +145,10 @@ export default function SignInPage() {
       <Box mt={8}>
         <Copyright />
       </Box>
+      <Backdrop className={classes.backdrop} open={open}>
+        <CircularProgress color="inherit" />
+        <p className={classes.loading}>Loading...</p>
+      </Backdrop>
     </Container>
   );
 }
