@@ -3,7 +3,7 @@
  >Please go to [this link](https://github.com/klwaamzhang/lite-scheduler-server) if you want to check out __the server side code__ and [this link](https://klwaamzhang.github.io/lite-scheduler-client/) if you want to see __the project__.
  
  ## Introduction
- Lite Scheduler is a web application which could use on cross-platform (pc, phone or tablet) for people who want to schedule the daily tasks. Users could add the daily tasks to the scheduler to manage their works and time.
+ Lite Scheduler is a react web app which is a lite version of scheduler for multiple types of users to schedule tasks. 
 
  ## Functionality
  In this app, you could:
