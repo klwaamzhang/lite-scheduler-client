@@ -11,7 +11,7 @@
 * Login as regular, student or senior user, enjoy the different scheduler layouts and functions
 * Login to save your schedule permanently, no need to worry losing schedules
 * Update your info or switch your account to any type of the user layout to fit what you need
-* ~~Send Email to you before an important event is coming ~~(still in development)
+* <del>Send Email to you before an important event is coming</del>(still in development)
 
 ## Web front end techniques
  In this app, we use:
