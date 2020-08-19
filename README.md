@@ -19,3 +19,5 @@
  * Material UI for css
  * Redux to manage the states
  * RESTful API to request and retrieve data
+ 
+ ## Screenshots
