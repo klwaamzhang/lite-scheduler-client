@@ -16,8 +16,20 @@
 ## Web front end technologies
  In this app, we use:
  * ReactJS to build the interfaces
+ * Syncfusion scheduler library
  * Material UI for css
  * Redux to manage the states
  * RESTful API to request and retrieve data
  
  ## Screenshots
+ * Home page after login
+ 
+![lite-scheduler-img1](https://user-images.githubusercontent.com/36008792/90681222-11e95280-e231-11ea-94fe-5dc63e829447.PNG)
+
+* Edit event page
+
+![lite-scheduler-img2](https://user-images.githubusercontent.com/36008792/90681481-7efce800-e231-11ea-8678-be58fb3b3d24.PNG)
+
+* User Account Page
+
+![lite-scheduler-img3](https://user-images.githubusercontent.com/36008792/90681770-ee72d780-e231-11ea-90af-3b6310133e57.PNG)
