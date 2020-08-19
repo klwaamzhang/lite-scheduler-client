@@ -13,7 +13,7 @@
 * Update your info or switch your account to any type of the user layout to fit what you need
 * <del>Send Email to you before an important event is coming</del> (still in development)
 
-## Web front end techniques
+## Web front end technologies
  In this app, we use:
  * ReactJS to build the interfaces
  * Material UI for css
